@@ -35,7 +35,14 @@ BEARER_TOKEN = os.getenv('BEARER_TOKEN')
 # ----------------
 # FastAPI setup
 # ----------------
-app = FastAPI()
+app = FastAPI(
+    title="URL Shortener Backend",
+    description="Backend for URL shortener service.",
+    version="1",
+    openapi_url="/api/v1/openapi.json",
+    docs_url="/api/v1/docs",
+    root_path="/api/v1",
+)
 
 app.add_middleware(
     SessionMiddleware,
@@ -71,7 +78,7 @@ class SessionData(BaseModel):
 # Routes
 # ---------
 @app.get(
-    "/api/v1/status",
+    "/status",
     response_model=StatusResponse,
     summary="Status of backend",
     description="Get the statistics of backend.",
@@ -86,7 +93,7 @@ def status_route():
 
 
 @app.post(
-    "/api/v1/logout",
+    "/logout",
     response_model=StatusResponse,
     summary="Logout",
     description="Logout the current logged in user.",
@@ -102,7 +109,7 @@ def logout_route(request: Request):
 
 
 @app.post(
-    "/api/v1/login",
+    "/login",
     response_model=StatusResponse,
     summary="Login",
     description="Login with username and password.",
@@ -126,7 +133,7 @@ async def login_route(request: Request, username: str = Form(...), password: str
 
 
 @app.get(
-    "/api/v1/admin_check",
+    "/admin_check",
     response_model=StatusResponse,
     summary="Admin check",
     description="Check if the current session is an admin or not.",
@@ -150,7 +157,7 @@ async def check_user_route(request: Request):
 
 
 @app.post(
-    "/api/v1/change_pass",
+    "/change_pass",
     response_model=StatusResponse,
     summary="Change password",
     description="Change admin password with new password.",
@@ -179,7 +186,7 @@ async def change_pass_route(
 
 
 @app.post(
-    "/api/v1/create_record",
+    "/create_record",
     response_model=ShortenedResponse,
     summary="Create a record",
     description="Create a shortened URL record with the given URL. Note that the URL must comes with protocol.",
@@ -198,7 +205,7 @@ async def create_record_route(
 
 
 @app.delete(
-    "/api/v1/delete_record",
+    "/delete_record",
     response_model=StatusResponse,
     summary="Delete a record",
     description=inspect.cleandoc("""
@@ -239,7 +246,7 @@ async def delete_record_route(
 
 
 @app.get(
-    "/api/v1/search_record",
+    "/search_record",
     response_model=SearchResponse,
     summary="Search a record",
     description="Search for a record using the shortened part (without base-URL) of the shortened URL.",
@@ -266,7 +273,7 @@ async def search_record_route(
 
 
 @app.get(
-    "/api/v1/get_all_records",
+    "/get_all_records",
     response_model=GetRecordsResponse,
     summary="Get all records",
     description="Get all records from the database.",
@@ -294,7 +301,7 @@ def get_all_records_route(
 
 
 @app.delete(
-    "/api/v1/purge_all_records",
+    "/purge_all_records",
     response_model=StatusResponse,
     summary="Purge all records",
     description="Purge all records from the database.",

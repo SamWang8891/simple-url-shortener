@@ -155,11 +155,13 @@
 
 #### 後端 👨‍🔧
 
-如果要修改後端，請按照以下步驟。否則，將 `python-backend` 資料夾複製到 `docker/` 並將其命名為 `backend`。
+FastAPI 說明文件在 https://example.com/api/docs。
 
-```bash 
-cp -r python-backend docker/backend
-```
+Authentication token 是為了開發方便繞過 cookie 驗證所使用，你可以選擇使用 cookie 或是 token 使用在說明文件中有鎖頭的 API 資源。
+
+Authentication token 存在於 `docker/backend/.env` 檔案中。如果是透過 `setup.sh` 設定，則會有另一份存放在 `token.txt` 中。
+
+如果要修改後端，請按照以下步驟。否則，將 `python-backend` 資料夾複製到 `docker/` 並將其命名為 `backend`。
 
 1. 移至 `python-backend` 資料夾。
 2. (可選，使用venv作為範例) 建立虛擬環境：
@@ -185,7 +187,9 @@ cp -r python-backend docker/backend
 
 ## 鳴謝 🙏
 
-感謝 [@xinshoutw](https://github.com/xinshoutw) 在此專案提供幫助 😄.
+感謝 [@xinshoutw](https://github.com/xinshoutw) 在此專案提供幫助 😄。
+
+感謝俍曄提供UI設計的協助 🎨。
 
 ---
 
