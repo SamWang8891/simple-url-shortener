@@ -11,7 +11,7 @@ import {getHostname} from './hostname.js';
         // Import the QRCodeStyling module
         const QRCodeStyling = (await import('qr-code-styling')).default;
 
-        // Bind the shorten URL events
+        // Bind the shortened URL events
         await bindShortenEvents(hostname, QRCodeStyling);
     } catch (error) {
         console.error('Initialization error:', error);
@@ -32,7 +32,7 @@ async function doRedir(suffix, hostname) {
     // List of pages that need to be redirected directly
     const otherPages = ['/admin', '/login', '/logout', '/change_pass'];
     if (otherPages.includes(suffix)) {
-        // Just redirect to the page (ex: /admin -> /admin/)
+        // Redirect to the page (ex: /admin -> /admin/)
         // console.log(suffix);
         window.location.href = `${hostname}${suffix}/`;
         return;
