@@ -100,7 +100,9 @@ echo "SECRET_KEY=$(openssl rand -hex 64)" >> docker/backend/.env
 
 
 # Generate bearer_token
-echo "BEARER_TOKEN=$(openssl rand -hex 16)" >> docker/backend/.env
+TOKEN=$(openssl rand -hex 16)
+echo "BEARER_TOKEN=$TOKEN" >> docker/backend/.env
+echo "TOKEN=$TOKEN" >> token.txt
 
 
 # Copy dictionary
