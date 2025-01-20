@@ -42,25 +42,50 @@
 
 ## 截圖 📸
 
-### 淺色模式 ⚪
+<div align="center">
 
-![Main Page Light Mode](readme_image/main-light.png)
-![Main Page Light Mode with QR Code](readme_image/main-qr-light.png)
+<table>
+    <thead>
+        <tr>
+            <th style="text-align: center;">淺色模式 ⚪</th>
+            <th style="text-align: center;">深色模式 ⚫</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td align="center">
+                <img src="readme_image/main-light.png" alt="Main Page Light Mode" width="600"/><br/>
+                🏠⚪ 主頁面淺色模式
+            </td>
+            <td align="center">
+                <img src="readme_image/main-dark.png" alt="Main Page Dark Mode" width="600"/><br/>
+                🏠⚫ 主頁面深色模式
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <img src="readme_image/main-qr-light.png" alt="Main Page Light Mode with QR Code" width="600"/><br/>
+                🏠⚪🔗 主頁面 QR Code 淺色模式
+            </td>
+            <td align="center">
+                <img src="readme_image/main-qr-dark.png" alt="Main Page Dark Mode with QR Code" width="600"/><br/>
+                🏠⚫🔗 主頁面 QR Code 深色模式
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <img src="readme_image/admin-light.png" alt="Admin Page 淺色模式" width="600"/><br/>
+                🛡⚪ 管理員頁面淺色模式
+            </td>
+            <td align="center">
+                <img src="readme_image/admin-dark.png" alt="Admin Page Dark Mode" width="600"/><br/>
+                🛡⚫ 管理員頁面深色模式
+            </td>
+        </tr>
+    </tbody>
+</table>
 
-### 深色模式 ⚫
-
-![Main Page Dark Mode](readme_image/main-dark.png)
-![Main Page Dark Mode with QR Code](readme_image/main-qr-dark.png)
-
-### 管理員頁面 🛡
-
-### 淺色模式 ⚪
-
-![Admin Page Light Mode](readme_image/admin-light.png)
-
-### Dark Mode ⚫️
-
-![Admin Page Dark Mode](readme_image/admin-dark.png)
+</div>
 
 ---
 
