@@ -1,0 +1,42 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Build files
+web-source/node_modules
+dist
+dist-ssr
+*.local
+*.sqlite
+node_modules
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# User generated
+__pycache__
+.env
+*.db
+web-frontend/conf.yaml
+python-backend/dictionary.txt
+docker/backend/
+docker/web/
+
+# Dev
+to-do.txt
+.venv
+*-debug.*
+
