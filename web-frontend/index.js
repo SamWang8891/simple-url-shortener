@@ -97,7 +97,7 @@ async function doShorten(hostname, QRCodeStyling) {
     const inputField = document.querySelector('.js-shorten-url-field');
     if (!inputField) return;
 
-    let url = inputField.value.trim().toLowerCase();
+    let url = inputField.value.trim();
     if (!url) return;
     if (url.indexOf(' ') !== -1) {
         alert('URL should not contain spaces.');
