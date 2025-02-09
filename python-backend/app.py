@@ -4,7 +4,7 @@ import sqlite3
 
 import uvicorn
 from dotenv import load_dotenv
-from fastapi import FastAPI, Request, Depends, Form, Query, Body
+from fastapi import FastAPI, Request, Depends, Form, Query
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel
 from starlette.middleware.cors import CORSMiddleware
@@ -36,9 +36,9 @@ BEARER_TOKEN = os.getenv('BEARER_TOKEN')
 # FastAPI setup
 # ----------------
 app = FastAPI(
-    title="URL Shortener Backend",
-    description="Backend for URL shortener service.",
-    version="1",
+    title="Simple URL Shortener Backend",
+    description="Backend for Simple URL Shortener service.",
+    version="1.1",
     openapi_url="/api/v1/openapi.json",
     docs_url="/api/v1/docs",
     root_path="/api/v1",
