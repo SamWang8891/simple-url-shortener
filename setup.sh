@@ -46,9 +46,11 @@ if [ "$(docker ps -aq -f name=simple-url-shortener)" ]; then
     read -p "There is an existing one, do you want to reinstall and reconfigure it? (yes/no): " confirm
     if [ $confirm == "yes" ]; then
         echo -e "\nStopping, please wait patiently..."
-        docker stop simple-word-url-shortener
+        docker stop simple-url-shortener-nginx
+        docker stop simple-url-shortener-python
         docker-compose down
-        docker rm simple-word-url-shortener
+        docker rm simple-url-shortener-nginx
+        docker rm simple-url-shortener-python
     else
         echo -e "Exiting...\n"
         exit 1
