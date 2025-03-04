@@ -34,6 +34,8 @@ web-frontend/conf.yaml
 python-backend/dictionary.txt
 docker/backend/
 docker/web/
+package-lock.json
+token.txt
 
 # Dev
 to-do.txt
