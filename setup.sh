@@ -1,11 +1,17 @@
 #!/bin/sh
 
 # Warn about the root directory naming
-if [ "${PWD##*/}" != "simple-url-shortener" ]; then
-    echo "Warning: You are either not in the simple-url-shortener directory or the naming of the root directory isn't \"simple-url-shortener\","
-    echo "Please stay in the simple-url-shortener directory(mandatory) or rename the root directory to \"simple-url-shortener\"(suggestion)."
-    read -p " do you want to continue (yes/no): " confirm
-    if [ $confirm != "yes" ]; then
+if [ ${PWD##*/} != "simple-url-shortener" ]; then
+    if [ ${PWD##*/} == "simple-url-shortener-modding" ]; then
+        echo -e "Warning: You are now using modding branch. Switch to main branch if you are not developing.\n"
+        echo -e "You'll need to build the files yourself according to READNE.md\n"
+    else
+        echo "Warning: You are either not in the simple-url-shortener directory or the naming of the root directory isn't \"simple-url-shortener\""
+        echo -e "\nPlease stay in the simple-url-shortener directory(mandatory) or rename the root directory to \"simple-url-shortener\"(suggestion).\n"
+    fi
+
+    read -p "Do you want to continue (yes/no): " confirm
+    if [ $confirm == "no" ]; then
         echo -e "Exiting...\n"
         exit 1
     fi
