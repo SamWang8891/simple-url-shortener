@@ -5,7 +5,7 @@
 if [ "${PWD##*/}" != "simple-url-shortener" ]; then
     if [ "${PWD##*/}" == "simple-url-shortener-modding" ]; then
         echo -e "Warning: You are now using modding branch. Switch to main branch if you are not developing.\n"
-        echo -e "You'll need to build the files yourself according to READNE.md\n"
+        echo -e "You'll need to build the files yourself according to README.md\n"
     else
         echo "Warning: You are either not in the simple-url-shortener directory or the naming of the root directory isn't \"simple-url-shortener\""
         echo -e "\nPlease stay in the simple-url-shortener directory(mandatory) or rename the root directory to \"simple-url-shortener\"(suggestion).\n"
