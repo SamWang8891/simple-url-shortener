@@ -38,6 +38,10 @@ async function doRedir(suffix, hostname) {
         return;
     }
 
+    // Make the page display "Redirecting..." when system doing the redirection
+    const whole = document.getElementById('js-whole');
+    whole.innerHTML = '<h1 class="center">Redirecting...</h1>';
+
     // If matched none of the above, try to search the record
     const shortKey = suffix.substring(1); // Get rid of the leading "/"
     try {
