@@ -113,7 +113,7 @@
 
 ```plaintext
 使用者: admin
-密碼: admin
+密碼: password
 ```
 
 請在第一次登錄後更改密碼。
