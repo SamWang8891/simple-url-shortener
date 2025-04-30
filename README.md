@@ -114,7 +114,7 @@ Default admin account:
 
 ```plaintext
 username: admin
-password: admin
+password: password
 ```
 
 Remember to change the password after the first login.
