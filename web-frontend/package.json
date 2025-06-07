@@ -9,11 +9,11 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^6.0.5"
+    "vite": "^6.3.5"
   },
   "dependencies": {
     "dotenv": "^16.4.7",
     "fs": "^0.0.1-security",
-    "qr-code-styling": "^1.8.3"
+    "qr-code-styling": "^1.9.2"
   }
 }
