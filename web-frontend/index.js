@@ -81,6 +81,14 @@ async function bindShortenEvents(hostname, QRCodeStyling) {
         });
     });
 
+    // Bind the click event of "Get Original QR" button
+    document.querySelectorAll('.js-get-original-qr-button').forEach((button) => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            doGetOriginalQR(hostname, QRCodeStyling);
+        });
+    });
+
     // Bind the form submission event
     const formElement = document.querySelector('form');
     if (formElement) {
@@ -232,6 +240,132 @@ function renderShortenedResult(originalUrl, shortenedUrl, dotColor, backColor, Q
     if (copyButton) {
         copyButton.addEventListener('click', () => {
             const copyText = document.querySelector('.js-shortened-url')?.textContent || '';
+            if (!copyText) return;
+            navigator.clipboard.writeText(copyText).then(() => {
+                alert('Copied the text: ' + copyText);
+            });
+        });
+    }
+}
+
+/**
+ * Dynamically switch the theme icon based on the current mode (light / dark)
+ * This part depends on external CSS or other mechanisms
+ */
+/**
+ * Generate QR code for the original URL without shortening
+ * @param {string} hostname - The hostname of the server
+ * @param {any} QRCodeStyling - The QRCodeStyling module after dynamic import
+ */
+async function doGetOriginalQR(hostname, QRCodeStyling) {
+    // Get the user input URL
+    const inputField = document.querySelector('.js-shorten-url-field');
+    if (!inputField) return;
+
+    let url = inputField.value.trim();
+    if (!url) return;
+    if (url.indexOf(' ') !== -1) {
+        alert('URL should not contain spaces.');
+        return;
+    }
+
+    // If the URL does not start with "http://" or "https://", add "https://"
+    if (!/^https?:\/\//.test(url)) {
+        url = `https://${url}`;
+    }
+
+    // Check if it is dark mode, and get the corresponding colors
+    const isDarkMode = document.body.classList.contains('darkmode');
+    const dotColor = getComputedStyle(document.documentElement)
+        .getPropertyValue(isDarkMode ? '--qrcode-dot-color-dark' : '--qrcode-dot-color')
+        .trim();
+    const backColor = getComputedStyle(document.documentElement)
+        .getPropertyValue(isDarkMode ? '--qrcode-background-color-dark' : '--qrcode-background-color')
+        .trim();
+
+    // Clear the input field
+    inputField.value = '';
+
+    // Render the original URL QR code
+    renderOriginalQRResult(url, dotColor, backColor, QRCodeStyling);
+}
+
+/**
+ * Render the original URL QR code
+ * @param {string} originalUrl - Original URL
+ * @param {string} dotColor - QRCode dot color
+ * @param {string} backColor - QRCode background color
+ * @param {any} QRCodeStyling - The QRCodeStyling module
+ */
+function renderOriginalQRResult(originalUrl, dotColor, backColor, QRCodeStyling) {
+    let displayHTML = '';
+
+    // If the URL contains non-ASCII characters, warn the user
+    if (/[^\x00-\x7F]/.test(originalUrl)) {
+        displayHTML += `
+            <h2 class="warning-text">WARNING!!!</h2>
+            <p class="warning-text center">Your URL contains non-ASCII characters. Please be careful!</p>
+        `;
+    }
+
+    // Main content HTML for original URL QR
+    displayHTML += `
+        <a class="center home-page-small-link" href="${originalUrl}" target="_blank">${originalUrl}</a>
+        <br />
+        <div class="center">
+            <svg class="center" xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px">
+                <path d="M480-200 240-440l56-56 184 183 184-183 56 56-240 240Zm0-240L240-680l56-56 184 183 184-183 56 56-240 240Z"/>
+            </svg>
+        </div>
+        <br />
+        <div class="center home-page-big-link">
+            <button id="copy-to-clipboard">
+                <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 -960 960 960" width="35px">
+                    <path d="M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z"/>
+                </svg>            
+            </button>
+            <a class="js-original-url" href="${originalUrl}" target="_blank">${originalUrl}</a>
+        </div>
+        <br />
+        <div id="qrcode" class="center"></div>
+        <div style="margin: 26px 0;"></div>
+    `;
+
+    // Place the content in the specified container
+    const displayInfo = document.querySelector('.js-display-info');
+    if (displayInfo) {
+        displayInfo.innerHTML = displayHTML;
+    }
+
+    // Create and display the QRCode for original URL
+    const qrcode = new QRCodeStyling({
+        width: 2400,
+        height: 2400,
+        data: originalUrl,
+        type: "canvas",
+        image: "icon-QR.png",  // This is the optional center logo of the QR Code
+        dotsOptions: {
+            color: dotColor,
+            type: "rounded"
+        },
+        backgroundOptions: {
+            color: backColor
+        },
+    });
+
+    const qrcodeContainer = document.getElementById('qrcode');
+    if (qrcodeContainer) {
+        qrcode.append(qrcodeContainer);
+    }
+
+    // Dealing with icon switching in dark/light mode
+    handleThemeSwitchIcon();
+
+    // Bind the "Copy to Clipboard" event for original URL
+    const copyButton = document.querySelector('#copy-to-clipboard');
+    if (copyButton) {
+        copyButton.addEventListener('click', () => {
+            const copyText = document.querySelector('.js-original-url')?.textContent || '';
             if (!copyText) return;
             navigator.clipboard.writeText(copyText).then(() => {
                 alert('Copied the text: ' + copyText);
