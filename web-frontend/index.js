@@ -213,8 +213,8 @@ function renderShortenedResult(originalUrl, shortenedUrl, dotColor, backColor, Q
 
     // Create and display the QRCode
     const qrcode = new QRCodeStyling({
-        width: 2400,
-        height: 2400,
+        width: 400,
+        height: 400,
         data: shortenedUrl,
         type: "canvas",
         image: "icon-QR.png",  // This is the optional center logo of the QR Code
@@ -225,11 +225,40 @@ function renderShortenedResult(originalUrl, shortenedUrl, dotColor, backColor, Q
         backgroundOptions: {
             color: backColor
         },
+        imageOptions: {
+            crossOrigin: "anonymous",
+            margin: 20
+        }
     });
 
     const qrcodeContainer = document.getElementById('qrcode');
     if (qrcodeContainer) {
-        qrcode.append(qrcodeContainer);
+        // Clear any existing QR code
+        qrcodeContainer.innerHTML = '';
+        
+        // Wait for the QR code to be ready before appending
+        setTimeout(() => {
+            try {
+                qrcode.append(qrcodeContainer);
+            } catch (error) {
+                console.warn('QR code generation failed, creating without logo:', error);
+                // Fallback: create QR code without logo
+                const fallbackQR = new QRCodeStyling({
+                    width: 400,
+                    height: 400,
+                    data: shortenedUrl,
+                    type: "canvas",
+                    dotsOptions: {
+                        color: dotColor,
+                        type: "rounded"
+                    },
+                    backgroundOptions: {
+                        color: backColor
+                    }
+                });
+                fallbackQR.append(qrcodeContainer);
+            }
+        }, 100);
     }
 
     // Dealing with icon switching in dark/light mode
@@ -343,7 +372,7 @@ function renderOriginalQRResult(originalUrl, dotColor, backColor, QRCodeStyling)
         height: 2400,
         data: originalUrl,
         type: "canvas",
-        image: "icon-QR.png",  // This is the optional center logo of the QR Code
+        image: "icon-QR.png",
         dotsOptions: {
             color: dotColor,
             type: "rounded"
@@ -351,11 +380,40 @@ function renderOriginalQRResult(originalUrl, dotColor, backColor, QRCodeStyling)
         backgroundOptions: {
             color: backColor
         },
+        imageOptions: {
+            crossOrigin: "anonymous",
+            margin: 20
+        }
     });
 
     const qrcodeContainer = document.getElementById('qrcode');
     if (qrcodeContainer) {
-        qrcode.append(qrcodeContainer);
+        // Clear any existing QR code
+        qrcodeContainer.innerHTML = '';
+        
+        // Wait for the QR code to be ready before appending
+        setTimeout(() => {
+            try {
+                qrcode.append(qrcodeContainer);
+            } catch (error) {
+                console.warn('QR code generation failed, creating without logo:', error);
+                // Fallback: create QR code without logo
+                const fallbackQR = new QRCodeStyling({
+                    width: 2400,
+                    height: 2400,
+                    data: originalUrl,
+                    type: "canvas",
+                    dotsOptions: {
+                        color: dotColor,
+                        type: "rounded"
+                    },
+                    backgroundOptions: {
+                        color: backColor
+                    }
+                });
+                fallbackQR.append(qrcodeContainer);
+            }
+        }, 100);
     }
 
     // Dealing with icon switching in dark/light mode
