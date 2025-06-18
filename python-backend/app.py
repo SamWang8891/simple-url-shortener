@@ -39,8 +39,8 @@ app = FastAPI(
     title="Simple URL Shortener Backend",
     description="Backend for Simple URL Shortener service.",
     version="1.1",
-    openapi_url="/api/v1/openapi.json",
-    docs_url="/api/v1/docs",
+    openapi_url="/openapi.json",
+    docs_url="/docs",
     root_path="/api/v1",
 )
 
