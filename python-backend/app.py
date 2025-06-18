@@ -27,7 +27,7 @@ dbfile = os.path.join(os.path.dirname(__file__), 'data.db')
 # Load env
 # -----------
 load_dotenv()
-ALLOWED_ORIGINS = os.getenv('ALLOWED_ORIGINS')
+ALLOWED_ORIGINS = os.getenv('ALLOWED_ORIGINS', '')
 origins = [origin.strip() for origin in ALLOWED_ORIGINS.split(",") if origin.strip()]
 SECRET_KEY = os.getenv('SECRET_KEY')
 BEARER_TOKEN = os.getenv('BEARER_TOKEN')
